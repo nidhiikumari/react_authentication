@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useCallback } from 'react';
 import {
   Box,
   Typography,
-  Button,
-  Stack
+  Button
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -39,7 +38,13 @@ const Index = () => {
     taxId,
     data,
     setBusinessError,
-    setBusinessFlag
+    setBusinessFlag,
+    setFirstName,
+    setLastName,
+    setEmail,
+    setMobile,
+    setPassword,
+    setConfirmPsd,
   } = contextApi;
 
   // validation----------
@@ -119,64 +124,39 @@ const Index = () => {
     return errors;
   };
 
-  const onValidateSuccess = () => {
-    if (!flag && !formError.name && !formError.lastName && !formError.email && !formError.password && !formError.confirm_password && !formError.phone) {
-      setShowNextPage(true);
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
-    }
-  };
-  console.log(!flag && !Object.keys(formError), 'check1')
-  console.log(!flag, 'check2')
-  console.log(Object.keys(formError).length < 0, 'check3')
-
   const validatesecondStep = () => {
     const errors = {};
     if (!brandName) {
       errors.name = 'Brand Name is required!';
       setBusinessFlag(true);
-    } else {
-      setBusinessFlag(false);
     }
     if (!brandType) {
       errors.brandType = 'Brand Type is required!';
       setBusinessFlag(true);
-    } else {
-      setBusinessFlag(false);
+    } else if (brandType === 'Select Type of Your Brand') {
+      errors.brandType = 'Select Type of Your Brand';
     }
     if (!address) {
       errors.address = 'Address is required!';
       setBusinessFlag(true);
-    } else {
-      setBusinessFlag(false);
     }
     if (!city) {
       errors.city = 'City is required!';
       setBusinessFlag(true);
-    } else {
-      setBusinessFlag(false);
     }
     if (!pin) {
       errors.pin = 'Pin is required!';
       setBusinessFlag(true);
-    } else {
-      setBusinessFlag(false);
     }
     if (!taxId) {
       errors.taxId = 'Tax Id Number is required!';
       setBusinessFlag(true);
-    } else {
-      setBusinessFlag(false);
     }
-    if (data) {
+    if (data === 'Non adult beverage kroger market supplier waiver and release') {
       errors.data = 'Ducument must be signed!';
     }
     setBusinessError(errors);
     return errors;
-  };
-  const clickHandle = async () => {
-    await validate();
-    await onValidateSuccess();
   };
 
   const nextStepHandle = async () => {
@@ -185,8 +165,38 @@ const Index = () => {
 
   const PrevBtnHandle = () => {
     setShowNextPage(false);
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setMobile('');
+    setPassword('');
+    setConfirmPsd('');
   };
-  console.log(showNextPage, 'showNextPage')
+  const checkError = useCallback(() => {
+    if (formError.name) {
+      setFlag(true);
+    } else if (formError.lastName) {
+      setFlag(true);
+    } else if (formError.email) {
+      setFlag(true);
+    } else if (formError.phone) {
+      setFlag(true);
+    } else if (formError.password) {
+      setFlag(true);
+    } else if (formError.confirm_password) {
+      setFlag(true);
+    }
+    else if (!flag && !formError.name && password && confirmPsd && !formError.lastName && !formError.email && !formError.password && !formError.confirm_password && !formError.phone) {
+      setShowNextPage(true);
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+    }
+  }, [formError, firstName, email, password, lastName, mobile, confirmPsd, flag, showNextPage, setShowNextPage, setFlag]);
+
+  const clickHandle = async () => {
+    await validate();
+    await checkError();
+  };
 
   return (
     <Box sx={isSmallScreen ? responsiveCss.isSmallScreen : css.rootStyle}>
@@ -197,13 +207,13 @@ const Index = () => {
       <Box>
         <Main />
       </Box>
-      <Box sx={css.footerStyle}>
+      <Box sx={css.footerStyles}>
         <Button sx={css.loginCss} variant="text"><ArrowBackIosIcon sx={css.loginIcon} />Back to Login</Button>
         {
           showNextPage ?
             (
               <Box sx={css.businessBtn}>
-                <Button sx={css.prevBtn} variant="outlined" onClick={() => PrevBtnHandle()}>Previous Step<ArrowForwardIosIcon sx={css.nextIcon} /></Button>
+                <Button sx={css.prevBtn} variant="contained" onClick={() => PrevBtnHandle()}>Previous Step<ArrowForwardIosIcon sx={css.nextIcon} /></Button>
                 <Button sx={css.nextBtn} variant="contained" onClick={() => nextStepHandle()}>Next Step<ArrowForwardIosIcon sx={css.nextIcon} /></Button>
               </Box>
             )

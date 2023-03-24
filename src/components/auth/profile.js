@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   Box,
   Typography,
@@ -12,8 +12,6 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-// import OutlinedInput from '@mui/material/OutlinedInput';
-// import InputLabel from '@mui/material/InputLabel';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { AppContext } from '../common/context';
@@ -35,8 +33,6 @@ const Profile = () => {
     mobile,
     password,
     confirmPsd,
-    setFlag,
-    setFormError,
     flag,
     formError,
     setConfirmPsd,
@@ -46,6 +42,7 @@ const Profile = () => {
     setLastName,
     setFirstName,
   } = contextApi;
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   return (
@@ -131,14 +128,13 @@ const Profile = () => {
                   </InputAdornment>
                 }
                 placeholder="create Your Password"
-                helperText={flag && formError && formError.password}
               />
               <FormHelperText>
                 {flag && formError?.password}
               </FormHelperText>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={12} md={6} sx={isSmallScreen ? responsiveCss.inputgridStyle : css.inputgridStyle}>
+          <Grid item xs={12} sm={12} md={6} sx={css.inputgridStyle}>
             <Typography sx={isSmallScreen ? responsiveCss.textStyle : css.textStyle}>Confirm Password*</Typography>
             <FormControl
               variant="outlined"

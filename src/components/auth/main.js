@@ -1,32 +1,33 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {
   Box,
-  Typography,
-  Button,
   ToggleButtonGroup,
-  ToggleButton,
-  TextField
+  ToggleButton
 } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import { AppContext } from '../common/context';
 import css from './css';
 import Profile from './profile';
-import Business from './business'
+import Business from './business';
 
 
 const Main = () => {
+  const theme = useTheme();
+  const isExSmallScreen = useMediaQuery(theme.breakpoints.down('xs'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const contextApi = useContext(AppContext);
   const [alignment, setAlignment] = useState('web');
 
   const { showNextPage } = contextApi;
 
-  const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
-  };
   useEffect(() => {
     if (showNextPage) {
       setAlignment([...alignment, 'android']);
+    } else {
+      setAlignment('web');
     }
-  }, [showNextPage]);
+  }, [showNextPage, alignment]);
   return (
     <div>
       <Box sx={css.boxStyle}>
@@ -34,17 +35,18 @@ const Main = () => {
           <ToggleButtonGroup
             value={alignment}
             exclusive
-            // onChange={handleChange}
             aria-label="Platform"
             sx={showNextPage ? css.secondPageStyle : css.toggleGroup}
           >
             <ToggleButton sx={css.toggleButton} value="web"><span style={css.steper}>1</span> Your Profile</ToggleButton>
             <ToggleButton sx={showNextPage ? css.toggleButton : css.darkToggle} value="android"><span style={showNextPage ? css.steper : css.darksteper}>2</span>Business Information</ToggleButton>
-            <ToggleButton disabled sx={showNextPage ? '' : css.toggleButton} value="ios"><span style={showNextPage ? css.darksteper : css.steper}>3</span>Additional Users</ToggleButton>
+            {
+              !isSmallScreen && !isExSmallScreen
+             &&  <ToggleButton disabled sx={!showNextPage ? '' : css.toggleButton} value="ios"><span style={showNextPage ? css.darksteper : css.steper}>3</span>Additional Users</ToggleButton>
+            }
           </ToggleButtonGroup>
         </Box>
         {showNextPage ? <Business /> : <Profile />}
-        {/* <Business /> */}
       </Box>
     </div>
   )

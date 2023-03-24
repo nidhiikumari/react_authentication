@@ -8,12 +8,25 @@ const Css = {
     textAlign: 'center',
     padding: '43px 124px'
   }),
+  rootBusiness: css({
+    padding: 17,
+    textAlign: 'center',
+    color: '#0d0862',
+    '@media only screen and (max-width: 886px)': {
+      padding: 5,
+      rootProfile: {
+        padding: 5
+      },
+      '@media only screen and (min-width: 600px)': {
+        padding: 5
+      }
+    },
+  }),
   loginCss: css({
     color: 'white',
     textTransform: 'capitalize',
     '@media only screen and (max-width: 600px)': {
       color: 'skyblue',
-      // justifyContent: 'center',
     }
   }),
   loginIcon: css({
@@ -26,7 +39,14 @@ const Css = {
     height: 30,
     textAlign: 'center',
     color: '#117eee',
-    marginRight: 9
+    marginRight: 9,
+    '&:not(:first-of-type)': {
+      '@media only screen and (max-width: 546px)': {
+        marginRight: 1,
+        marginLeft: 1,
+        display:'hidden'
+      }
+    },
   },
   darksteper: {
     backgroundColor: '#0d0862',
@@ -43,21 +63,20 @@ const Css = {
       textTransform: 'capitalize',
       fontSize: 18,
       color: '#0d0862 !important',
-      // backgroundColor: '#e5dfdf'
+      '@media only screen and (max-width: 546px)': {
+        display:'hidden'
+      }
     },
   }),
   createAccount: css({
     fontSize: 22,
     color: 'white',
-    // lineHeight: 1.9,
-    // marginTop: '-34px'
   }),
   header: css({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 33,
-    // textRendering:,
     '@media only screen and (max-width: 730px)': {
       display: 'flex',
       flexDirection: 'column',
@@ -71,19 +90,11 @@ const Css = {
       position: 'static',
       right: 0
     },
-    // display: 'flex',
-    // flexDirection: 'row',
-    // justifyContent: 'flex-end',
-    '@media only screen and (max-width: 600px)': {
-      // display: 'flex',
-      // justifyContent: 'center',
-    }
-    // paddingRight: 
   }),
   footerStyle: css({
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '23px 0px',
+    padding: '29px 0px',
     textTransform: 'capitalize',
     '@media only screen and (max-width: 378px)': {
       display: 'flex',
@@ -91,9 +102,19 @@ const Css = {
       justifyContent: 'center',
     }
   }),
+  footerStyles: css({
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '29px 0px',
+    textTransform: 'capitalize',
+    '@media only screen and (max-width: 588px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    }
+  }),
   nextBtn: ({
     textTransform: 'capitalize',
-    // boxShadow: 'none',
     background: 'linear-gradient(to right, #6666ff 0%, #6600cc 100%)'
   }),
   nextIcon: css({
@@ -117,7 +138,6 @@ const Css = {
   }),
   boxtoggle: css({
     backgroundColor: '#e5dfdf'
-    // background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(9,49,121,1) 100%)!important'
   }),
   secondPageStyle: css({
     width: '100%',
@@ -217,25 +237,23 @@ const Css = {
     '& .MuiToggleButton-root': {
       textTransform: 'capitalize',
       fontSize: 18,
-      color: 'white'
-      // backgroundColor: '#e5dfdf'
+      '@media only screen and (max-width: 450px)': {
+        fontSize: '10px',
+      }
     },
     '& .Mui-selected': {
-      // background: '#117eee',
       color: 'white',
       borderTopRightRadius: '26px',
       borderBottomRightRadius: '26px',
-      background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(9,49,121,1) 100%)!important'
+      background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(9,49,121,1) 100%)!important',
+      '@media only screen and (max-width: 450px)': {
+        fontSize: '10px'
+      }
     },
     '& .MuiToggleButtonGroup-grouped': {
       padding: '0px',
       border: 'none',
-      '&.Mui-disabled': {
-        // borderTopRightRadius: '26px',
-        // borderBottomRightRadius: '26px'
-      },
       '&:not(:first-of-type)': {
-        // borderBottomLeftRadius: 26,
         '@media only screen and (max-width: 546px)': {
           display: 'hidden'
         }
@@ -259,10 +277,8 @@ const Css = {
         }
       },
       '&:not(:last-of-type)': {
-        // background: 'rgb(2,0,36)',
         borderTopRightRadius: '26px',
         borderBottomRightRadius: '26px',
-        // background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(9,49,121,1) 100%)',
         width: '100%',
         height: '50px',
         '@media only screen and (max-width: 546px)': {
@@ -280,37 +296,40 @@ const Css = {
     '& .MuiToggleButton-root': {
       color: 'white'
     },
-    '& .MuiToggleButton-root:active': {
-      // borderTopRightRadius: '26px',
-    },
-    // '& .Mui-selected': {
-    //   background: 'rgb(2,0,36)',
-    //   background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(9,49,121,1) 100%)',
-    //   borderTopRightRadius: '26px',
-    //   borderBottomRightRadius: '26px',
-    //   boxShadow: '10px 5px 5px rgb(2,0,36)'
-    // }
   }),
   businessBtn: css({
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    '@media only screen and (max-width: 588px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    }
   }),
   prevBtn: css({
-    marginLeft: '-10rem'
-    // border: 'linear-gradient(to right, #6666ff 0%, #6600cc 100%)'
+    marginLeft: '-10rem',
+    marginRight: 20,
+    border: '1px solid #6600cc',
+    color: '#6600cc',
+    boxShadow: 'none',
+    borderRadius: 9,
+    backgroundColor: 'white',
+    textTransform: 'capitalize',
+    '@media only screen and (max-width: 588px)': {
+      marginLeft: 0,
+      marginRight: 0,
+    }
   }),
 
   // profile css--------------
   rootProfile: css({
-    // textAlign: 'center',
     padding: '17px 0px 75px 0px',
     color: '#0d0862',
     '@media only screen and (max-width: 886px)': {
       padding: 5,
       rootProfile: {
         padding: 5
-        /* styles for screens with a minimum width of 600px */
       },
       '@media only screen and (min-width: 600px)': {
         padding: 5
@@ -321,7 +340,6 @@ const Css = {
     fontSize: 30
   }),
   text: css({
-    // width: '45%',
     marginTop: 4,
     textAlign: 'center',
     alignItems: 'center',
@@ -340,20 +358,41 @@ const Css = {
     '@media only screen and (min-width: 880px)': {
       padding: '4px 103px',
     }
-
-    // margin: 0,
-    // padding: 0
   }),
   inputStyle: css({
     width: '100%',
-    // minHeight: 45,
-    // maxHeight: 70,
     flexGrow: 0,
     '.MuiOutlinedInput-input': {
       height: '0.4375em'
     },
     '.MuiInputBase-input': {
       height: '0.4375em'
+    }
+  }),
+  rightIcon: css({
+    color: 'green'
+  }),
+  messageStyle: css({
+    fontSize: 18,
+    padding: 4,
+  }),
+  wrongIcon: css({
+    color: 'red'
+  }),
+  helpIcon: css({
+    height: 20,
+    marginBottom: -4,
+    cursor: 'pointer'
+  }),
+  formStyles: css({
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'left',
+    paddingLeft: '0.6rem',
+    paddingRight: '0.6rem',
+    '@media only screen and (max-width: 275px)': {
+      paddingLeft: '0.6rem',
+      paddingRight: '0.6rem',
     }
   }),
   inputgridStyle: css({
@@ -365,13 +404,17 @@ const Css = {
       padding: 15,
       rootProfile: {
         padding: 5
-        /* styles for screens with a minimum width of 600px */
       },
       '@media only screen and (min-width: 600px)': {
         padding: 15
       }
     }
-    // maxWidth: '40%'
+  }),
+  inputgridStyles: css({
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'left',
+    paddingTop: 0
   }),
   textStyle: css({
     marginTop: '1px',
@@ -382,15 +425,12 @@ const Css = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    // textAlign: 'center',
     padding: '4px 103px',
-    // alignItems: 'left',
     textAlign: 'left',
     color: '#000066',
     '@media only screen and (max-width: 877px)': {
-      // padding: 15,
       padding: 20,
-      },
+    },
   }),
   titleStyle: css({
     marginTop: 38,
@@ -405,7 +445,10 @@ const Css = {
     color: '#1976d2',
     textAlign: 'left',
     marginLeft: '6.4rem',
-    marginTop: '2.5rem'
+    marginTop: '2.5rem',
+    '@media only screen and (max-width: 858px)': {
+      marginLeft: '1.6rem'
+    },
   }),
   infoStyle: css({
     color: '#1976d2',
@@ -426,9 +469,21 @@ const Css = {
   }),
   viewBtn: css({
     textTransform: 'capitalize',
-    // boxShadow: 'none',
     minWidth: 40,
     background: 'linear-gradient(to right, #6666ff 0%, #6600cc 100%)'
+  }),
+  gridStyles: css({
+    border: 'none',
+    boxShadow: 'none',
+    padding: '4px 123px',
+    alignItems: 'center',
+    textAlign: 'center',
+    '@media only screen and (min-width: 600px)': {
+      padding: 5
+    },
+    '@media only screen and (min-width: 880px)': {
+      padding: '4px 103px',
+    }
   })
 };
 export default Css;

@@ -15,6 +15,12 @@ const ResponsiveCss = {
     alignItems: 'center',
     textAlign: 'center'
   }),
+  gridStyles: css({
+    border: 'none',
+    boxShadow: 'none',
+    alignItems: 'center',
+    textAlign: 'center'
+  }),
   boxStyle: css({
     backgroundColor: 'white',
     borderRadius: 10,
@@ -38,7 +44,6 @@ const ResponsiveCss = {
     marginTop: 24
   }),
   rootProfile: css({
-    // textAlign: 'center',
     padding: '17px 10px 15px 15px'
   }),
   textStyle: css({
@@ -50,7 +55,6 @@ const ResponsiveCss = {
     flexDirection: 'column',
     textAlign: 'left',
     paddingTop: 0
-    // maxWidth: '40%'
   }),
 };
 export default ResponsiveCss;
