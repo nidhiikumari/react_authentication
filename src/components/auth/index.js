@@ -121,6 +121,11 @@ const Index = () => {
       setFlag(false);
     }
     setFormError(errors);
+    if (firstName && lastName && email && mobile && confirmPsd && !errors.name && !errors.lastName && !errors.email && !errors.password && !errors.confirm_password && !errors.phone) {
+      setShowNextPage(true);
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+    }
     return errors;
   };
 
@@ -172,31 +177,11 @@ const Index = () => {
     setPassword('');
     setConfirmPsd('');
   };
-  const checkError = useCallback(() => {
-    if (formError.name) {
-      setFlag(true);
-    } else if (formError.lastName) {
-      setFlag(true);
-    } else if (formError.email) {
-      setFlag(true);
-    } else if (formError.phone) {
-      setFlag(true);
-    } else if (formError.password) {
-      setFlag(true);
-    } else if (formError.confirm_password) {
-      setFlag(true);
-    }
-    else if (!flag && !formError.name && password && confirmPsd && !formError.lastName && !formError.email && !formError.password && !formError.confirm_password && !formError.phone) {
-      setShowNextPage(true);
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
-    }
-  }, [formError, firstName, email, password, lastName, mobile, confirmPsd, flag, showNextPage, setShowNextPage, setFlag]);
 
   const clickHandle = async () => {
     await validate();
-    await checkError();
   };
+
 
   return (
     <Box sx={isSmallScreen ? responsiveCss.isSmallScreen : css.rootStyle}>
